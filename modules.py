@@ -27,8 +27,9 @@ def store_history(name, filename='history.json'):
             'files-merged': get_filename(),
             'date and time': datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
         })
-        file.seek(0)
-        json.dump(file_data, file, indent=4)
+
+        with open(filename, 'w') as file:
+            json.dump(file_data, file, indent=4)
 
 # check if the file exists and is a pdf
 def search_selection(file):
@@ -43,7 +44,7 @@ def get_filename(file_list = get_list()):
     
     for file in file_list:
         # file_list.replace(file, file.split('/')[-1])
-        names.append(file.split('/')[-1])
+        names.append(file.split('\\')[-1])
         
     return names
 
